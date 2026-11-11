@@ -9,6 +9,7 @@ export const siteMedia = defineType({
     defineField({name: 'label', title: '¿Dónde aparece?', type: 'string', readOnly: true}),
     defineField({name: 'image', title: 'Foto', type: 'image', options: {hotspot: true}}),
     defineField({name: 'file', title: 'Archivo', type: 'string', readOnly: true, hidden: true}),
+    defineField({name: 'page', title: 'Página', type: 'string', readOnly: true, hidden: true}),
     defineField({name: 'position', title: 'Posición', type: 'number', readOnly: true, hidden: true}),
   ],
   orderings: [{title: 'Orden', name: 'position', by: [{field: 'position', direction: 'asc'}]}],

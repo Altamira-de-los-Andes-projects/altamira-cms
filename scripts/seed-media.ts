@@ -42,6 +42,11 @@ const EMPTY: [string, string][] = [
   ['news-2', 'Novedades · Foto de artículo 2'],
   ['news-3', 'Novedades · Foto de artículo 3'],
 ]
+// which page of the site uses the photo (the Studio's live preview only loads what the page on screen needs)
+const PAGE_BY_LABEL: Record<string, string> = {
+  'Aviso de edad': 'gate', Inicio: 'home', 'Nuestros vinos': 'vinos', 'Nuestros viñedos': 'vinedos', Contacto: 'contacto', Galería: 'galeria', Novedades: 'novedades',
+}
+export const pageOf = (label: string) => PAGE_BY_LABEL[label.split(' · ')[0]] ?? 'home'
 const idOf = (file: string) => `siteMedia-${file.replace(/[^A-Za-z0-9_-]/g, '-')}`
 const up = async (kind: 'image' | 'file', file: string) => {
   const a = await client.assets.upload(kind, fs.createReadStream(path.join(assets, file)), {filename: file})
@@ -52,9 +57,9 @@ async function main() {
   let position = 0
   for (const [file, label] of PHOTOS) {
     const asset = await up('image', file)
-    await client.createIfNotExists({_id: idOf(file), _type: 'siteMedia', file, label, position: position++, image: {_type: 'image', asset}})
+    await client.createIfNotExists({_id: idOf(file), _type: 'siteMedia', file, label, page: pageOf(label), position: position++, image: {_type: 'image', asset}})
   }
-  for (const [file, label] of EMPTY) await client.createIfNotExists({_id: idOf(file), _type: 'siteMedia', file, label, position: position++})
+  for (const [file, label] of EMPTY) await client.createIfNotExists({_id: idOf(file), _type: 'siteMedia', file, label, page: pageOf(label), position: position++})
   console.log(`${position} photos`)
 
   const heroVideo = {_type: 'file', asset: await up('file', 'hero-andes.mp4')}
