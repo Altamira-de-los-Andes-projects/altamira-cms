@@ -5,6 +5,8 @@ import {esESLocale} from '@sanity/locale-es-es'
 import {internationalizedArray} from 'sanity-plugin-internationalized-array'
 import {structure} from './structure'
 import {schemaTypes} from './schemaTypes'
+import {AltamiraMark, altamiraTheme} from './branding'
+import {homeTool} from './homeTool'
 
 // Types that exist once, so they open directly instead of as a list
 const singletons = ['siteSettings']
@@ -12,18 +14,21 @@ const singletons = ['siteSettings']
 export default defineConfig({
   name: 'default',
   title: 'Altamira de los Andes',
+  icon: AltamiraMark,
+  theme: altamiraTheme,
 
   projectId: '65z18eah',
   dataset: 'production',
 
   plugins: [
-    // first tool, so editors land on the real website and click what they want to change
+    // first tool: a welcome page with big shortcuts, in Spanish and English
+    homeTool(),
     presentationTool({
-      title: 'Editar sobre la web',
-      previewUrl: {initial: process.env.SANITY_STUDIO_PREVIEW_URL || 'https://altamira-azure.vercel.app'},
+      title: 'Editar sobre la web · Edit on the website',
+      previewUrl: {initial: process.env.SANITY_STUDIO_PREVIEW_URL || 'https://altamiradelosandes.com'},
       allowOrigins: ['https://altamira-azure.vercel.app', 'https://altamira-de-los-andes.vercel.app', 'https://altamiradelosandes.com', 'https://www.altamiradelosandes.com', 'http://localhost:*'],
     }),
-    structureTool({title: 'Contenido', structure}),
+    structureTool({title: 'Contenido · Content', structure}),
     esESLocale(),
     // languages come from the "language" documents, so editors can add or remove one without code changes
     internationalizedArray({
