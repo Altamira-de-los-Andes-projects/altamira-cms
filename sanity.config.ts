@@ -20,8 +20,8 @@ export default defineConfig({
     // first tool, so editors land on the real website and click what they want to change
     presentationTool({
       title: 'Editar sobre la web',
-      previewUrl: {initial: process.env.SANITY_STUDIO_PREVIEW_URL || 'https://altamira-de-los-andes.vercel.app'},
-      allowOrigins: ['https://altamira-de-los-andes.vercel.app', 'https://altamiradelosandes.com', 'https://www.altamiradelosandes.com', 'http://localhost:*'],
+      previewUrl: {initial: process.env.SANITY_STUDIO_PREVIEW_URL || 'https://altamira-azure.vercel.app'},
+      allowOrigins: ['https://altamira-azure.vercel.app', 'https://altamira-de-los-andes.vercel.app', 'https://altamiradelosandes.com', 'https://www.altamiradelosandes.com', 'http://localhost:*'],
     }),
     structureTool({title: 'Contenido', structure}),
     esESLocale(),
