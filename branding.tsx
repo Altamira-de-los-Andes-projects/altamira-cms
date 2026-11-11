@@ -1,7 +1,9 @@
 // The estate's look for the Studio: the same mark and colours as the website (vistaflores: public/favicon.svg, src/index.css).
 import {Box, Button, Card, Flex} from '@sanity/ui'
+import {buildTheme} from '@sanity/ui/theme'
+import {cyan, green, magenta, orange, purple, red, yellow, type ColorTintKey} from '@sanity/color'
 import {TranslateIcon} from '@sanity/icons/Translate'
-import {buildLegacyTheme, type NavbarProps} from 'sanity'
+import type {NavbarProps} from 'sanity'
 import {LANG, switchLang} from './lang'
 
 // Sanity's top bar plus one button that switches the whole Studio between English and Spanish
@@ -47,28 +49,18 @@ export function AltamiraMark() {
   )
 }
 
-const burgundy = '#6b1f2a'
-const ink = '#14120f'
-const cream = '#f7f4ee'
+// The website's colours as Sanity's palette: warm greys from the site's cream to its near-black, and its burgundy where
+// Sanity uses blue. Sanity builds the light and dark looks from the same scales, so the Studio follows the computer's
+// light/dark setting (or the choice in the account menu), like its default theme does.
+const tints = (hexes: string[]) =>
+  Object.fromEntries(['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'].map((k, i) => [k, hexes[i]])) as Record<ColorTintKey, string>
 
-export const altamiraTheme = buildLegacyTheme({
-  '--black': ink,
-  '--white': cream,
-  '--gray': '#7a7268',
-  '--gray-base': '#7a7268',
-  '--component-bg': cream,
-  '--component-text-color': ink,
-  '--brand-primary': burgundy,
-  '--default-button-color': '#7a7268',
-  '--default-button-primary-color': burgundy,
-  '--default-button-success-color': '#4f6b3a',
-  '--default-button-warning-color': '#b07a2a',
-  '--default-button-danger-color': '#a33a2f',
-  '--state-info-color': burgundy,
-  '--state-success-color': '#4f6b3a',
-  '--state-warning-color': '#b07a2a',
-  '--state-danger-color': '#a33a2f',
-  '--main-navigation-color': ink,
-  '--main-navigation-color--inverted': cream,
-  '--focus-color': burgundy,
+export const altamiraTheme = buildTheme({
+  palette: {
+    black: '#0d0b08',
+    white: '#f7f4ee',
+    gray: tints(['#f7f4ee', '#efeae1', '#ded8cc', '#c7bfb1', '#a39a8c', '#7a7268', '#5e574e', '#433d36', '#2a2520', '#1f1b16', '#16130f']),
+    blue: tints(['#fbf0f1', '#f5dadd', '#e9b2b9', '#d98591', '#c85d6c', '#a63a4b', '#8a2a39', '#6b1f2a', '#551821', '#3e1118', '#2a0b10']),
+    red, orange, yellow, green, cyan, purple, magenta,
+  },
 })
