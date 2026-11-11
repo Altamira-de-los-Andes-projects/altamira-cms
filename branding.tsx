@@ -1,5 +1,5 @@
 // The estate's look for the Studio: the same mark and colours as the website (vistaflores: public/favicon.svg, src/index.css).
-import {Box, Button, Flex} from '@sanity/ui'
+import {Box, Button, Card, Flex} from '@sanity/ui'
 import {TranslateIcon} from '@sanity/icons/Translate'
 import {buildLegacyTheme, type NavbarProps} from 'sanity'
 import {LANG, switchLang} from './lang'
@@ -7,9 +7,10 @@ import {LANG, switchLang} from './lang'
 // Sanity's top bar plus one button that switches the whole Studio between English and Spanish
 export function NavbarWithLanguage(props: NavbarProps) {
   return (
-    <Flex align="center">
+    // stretch + a Card with the bar's own background and bottom line, so the button sits on the bar, not on the page behind it
+    <Flex align="stretch">
       <Box flex={1}>{props.renderDefault(props)}</Box>
-      <Box paddingX={2}>
+      <Card borderBottom paddingX={2} display="flex" style={{alignItems: 'center'}}>
         <Button
           icon={TranslateIcon}
           text={LANG === 'es' ? 'English' : 'Español'}
@@ -19,7 +20,7 @@ export function NavbarWithLanguage(props: NavbarProps) {
           padding={2}
           onClick={switchLang}
         />
-      </Box>
+      </Card>
     </Flex>
   )
 }
