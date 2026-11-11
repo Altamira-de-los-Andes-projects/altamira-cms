@@ -1,5 +1,28 @@
 // The estate's look for the Studio: the same mark and colours as the website (vistaflores: public/favicon.svg, src/index.css).
-import {buildLegacyTheme} from 'sanity'
+import {Box, Button, Flex} from '@sanity/ui'
+import {TranslateIcon} from '@sanity/icons/Translate'
+import {buildLegacyTheme, type NavbarProps} from 'sanity'
+import {LANG, switchLang} from './lang'
+
+// Sanity's top bar plus one button that switches the whole Studio between English and Spanish
+export function NavbarWithLanguage(props: NavbarProps) {
+  return (
+    <Flex align="center">
+      <Box flex={1}>{props.renderDefault(props)}</Box>
+      <Box paddingX={2}>
+        <Button
+          icon={TranslateIcon}
+          text={LANG === 'es' ? 'English' : 'Español'}
+          title={LANG === 'es' ? 'Switch the Studio to English' : 'Cambiar el Studio a español'}
+          mode="ghost"
+          fontSize={1}
+          padding={2}
+          onClick={switchLang}
+        />
+      </Box>
+    </Flex>
+  )
+}
 
 // the estate mark: an "A" peak resting on an arc, on burgundy
 export function AltamiraMark() {

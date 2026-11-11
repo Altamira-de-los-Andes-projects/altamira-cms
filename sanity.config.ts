@@ -5,7 +5,8 @@ import {esESLocale} from '@sanity/locale-es-es'
 import {internationalizedArray} from 'sanity-plugin-internationalized-array'
 import {structure} from './structure'
 import {schemaTypes} from './schemaTypes'
-import {AltamiraMark, altamiraTheme} from './branding'
+import {AltamiraMark, altamiraTheme, NavbarWithLanguage} from './branding'
+import {LANG, tr} from './lang'
 import {homeTool} from './homeTool'
 
 // Types that exist once, so they open directly instead of as a list
@@ -16,19 +17,22 @@ export default defineConfig({
   title: 'Altamira de los Andes',
   icon: AltamiraMark,
   theme: altamiraTheme,
+  // the language button in the top bar (see lang.ts) decides the Studio's language: only that locale is offered
+  studio: {components: {navbar: NavbarWithLanguage}},
+  i18n: {locales: (prev) => prev.filter((l) => l.id === (LANG === 'es' ? 'es-ES' : 'en-US'))},
 
   projectId: '65z18eah',
   dataset: 'production',
 
   plugins: [
-    // first tool: a welcome page with big shortcuts, in Spanish and English
+    // first tool: a welcome page with big shortcuts
     homeTool(),
     presentationTool({
-      title: 'Editar sobre la web · Edit on the website',
+      title: tr('Editar sobre la web', 'Edit on the website'),
       previewUrl: {initial: process.env.SANITY_STUDIO_PREVIEW_URL || 'https://altamiradelosandes.com'},
       allowOrigins: ['https://altamira-azure.vercel.app', 'https://altamira-de-los-andes.vercel.app', 'https://altamiradelosandes.com', 'https://www.altamiradelosandes.com', 'http://localhost:*'],
     }),
-    structureTool({title: 'Contenido · Content', structure}),
+    structureTool({title: tr('Contenido', 'Content'), structure}),
     esESLocale(),
     // languages come from the "language" documents, so editors can add or remove one without code changes
     internationalizedArray({
