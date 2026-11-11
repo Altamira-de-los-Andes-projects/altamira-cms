@@ -7,6 +7,7 @@ export default defineCliConfig({
   },
   studioHost: 'altamira-de-los-andes',
   deployment: {
+    appId: 'xlotq26c30yfg9h22ob4hyb4',
     /**
      * Enable auto-updates for studios.
      * Learn more at https://www.sanity.io/docs/studio/latest-version-of-sanity#k47faf43faf56
