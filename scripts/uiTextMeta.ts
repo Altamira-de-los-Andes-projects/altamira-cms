@@ -30,6 +30,8 @@ const WORDS: Record<string, string> = {
   region: 'región', sections: 'sección', see: 'ver', soil: 'suelo', specs: 'datos', tag: 'etiqueta', text: 'texto', to: 'a',
   unit: 'unidad', updated: 'actualizado', value: 'valor', vines: 'viñas', vineyards: 'viñedos', pacific: 'Pacífico', atlantic: 'Atlántico',
   chile: 'Chile', asl: 'm s. n. m.',
+  langOf: 'texto accesible del botón de idioma (usa {lang})', openMenu: 'botón abrir menú', closeMenu: 'botón cerrar menú',
+  inquiry: 'mensaje de consulta (usa {wine})', awardsList: 'lista de premios', critic: 'crítico', a11y: 'accesibilidad',
   h: 'subtítulo', p: 'texto', l: 'etiqueta', v: 'valor', desc2: 'descripción',
 }
 const split = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Za-z])(\d)/g, '$1 $2').split(' ')
